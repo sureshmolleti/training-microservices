@@ -1,0 +1,155 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Swagger sample app
+  description: Microservices training Swagger Example
+# during dev, should point to your local machine
+host: localhost:3001
+# basePath prefixes all resource paths
+basePath: /
+tags:
+  - name: site
+    description: Site API
+#
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /sites:
+    # in which file to look for the controller
+    x-swagger-router-controller: siteController
+    get:
+      # which exposed method should be used as handler
+      operationId: get
+      tags:
+        - site
+      description: Return a sites list
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Site'
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      operationId: create
+      tags:
+        - site
+      description: Add a new site
+      parameters:
+      # parameters are validated by swagger
+      - name: site
+        description: Site properties
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/Site"
+      responses:
+        "201":
+          description: Success
+          schema:
+            $ref: "#/definitions/Site"
+         # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /sites/{id}:
+    x-swagger-router-controller: siteController
+    get:
+      operationId: findById
+      tags:
+        - site
+      description: Return Site by id
+      parameters:
+      - name: id
+        type: integer
+        in: path
+        required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/Site'
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    put:
+      operationId: updateById
+      tags:
+        - site
+      description: Update a site
+      parameters:
+      - name: id
+        description: Site id
+        type: integer
+        in: path
+        required: true
+      - name: site
+        description: Site properties
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/Site"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Site"
+         # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      operationId: removeById
+      tags:
+        - site
+      description: Delete a site by ID
+      parameters:
+      - name: id
+        description: Site id
+        type: integer
+        in: path
+        required: true
+      responses:
+        "204":
+          description: Success
+         # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+# complex objects have schema definitions
+definitions:
+  Site:
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      url:
+        type: string
+    required:
+      - title
+      - url
+  ErrorResponse:
+    properties:
+      message:
+        type: string
+    required:
+      - message

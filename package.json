@@ -1,0 +1,14 @@
+{
+  "name": "microservices-training",
+  "private": true,
+  "version": "1.1.0",
+  "description": "OMicroservices training",
+  "author": "RisingStack, Inc.",
+  "license": "SEE LICENSE IN LICENSE",
+  "devDependencies": {
+    "eslint": "3.19.0",
+    "eslint-config-airbnb-base": "11.2.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-promise": "3.5.0"
+  }
+}
