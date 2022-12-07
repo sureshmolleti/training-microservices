@@ -9,7 +9,7 @@
   },
   "author": "RisingStack, Inc.",
   "dependencies": {
-    "express": "4.15.3",
+    "express": "4.17.3",
     "express-routes-versioning": "1.0.0"
   }
 }
