@@ -11,6 +11,6 @@
   "author": "RisingStack, Inc.",
   "dependencies": {
     "circuit-breaker-js": "0.0.1",
-    "express": "4.15.3"
+    "express": "4.17.3"
   }
 }
